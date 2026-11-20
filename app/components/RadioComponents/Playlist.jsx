@@ -16,7 +16,7 @@ export default function Playlist({playlist=[]}) {
       {playlist.map((val,i)=>{
        return(
               <ListContent key={`${val.id}-${i}`} title={shortenTheTitle(val.title_short)} picture={val.album.cover_small}
-              time={formatTime(val.duration)} index={i+1} />
+              time={formatTime(val.duration)} index={i+1} id={val.id} preview={val.preview} />
        )
       })}
     </ul>

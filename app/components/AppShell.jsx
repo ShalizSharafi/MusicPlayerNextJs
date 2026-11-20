@@ -24,6 +24,7 @@ function reducer(state,action){
 export default function AppShell({children}) {
        const [state ,dispatch] = useReducer(reducer,{hamOpen:false, searchOpen:false})
        const [scrolled,setScrolled] = useState(false)
+       
      
 
        useEffect(()=>{

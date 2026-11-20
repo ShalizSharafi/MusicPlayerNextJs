@@ -1,13 +1,30 @@
+'use client'
 import React from 'react'
-
-
+import PlayBtn from '../RadioComponents/PlayBtn'
+import usePlayerStore from '@/app/store/PlayerStore'
 /////rows
-export default function ListContent({title,picture,time,index}) {
+export default function ListContent({title,picture,time,index,id,preview}) {
+
+  const playTrack = usePlayerStore(state=>state.playTrack) //state isn't the properties themselves. It's the whole current Zustand store state,
+
+  const currentTrackId = usePlayerStore(state=>state.currentTrackId)
+  const isPlayingState = usePlayerStore(state=>state.isPlaying)
+  const isPlaying = id === currentTrackId && isPlayingState //Then we can calculate whether this row is the active one:
+
+  console.log(currentTrackId, preview)
+
+  // id of this row === currentTrackId in Zustand → isPlaying is true → PlayBtn shows Pause.
+
   return (
-    <ul className='w-full justify-between flex items-center p-5 bg-bareGray/20 rounded-[10px] hover:bg-bareGray/40 duration-400 '>
+    <ul  onClick={() => {
+    console.log('clicked:', id)
+    playTrack(id,preview)
+  }} className='w-full cursor-pointer justify-between flex items-center p-5 bg-bareGray/20 rounded-[10px] hover:bg-bareGray/40 duration-400 '>
       <div className='flex items-center gap-5'>
         <li className='text-white/50 font-normal text-xs lg:text-[15px]'>{index}</li>
-      <li><figure className='w-8 h-8 rounded-xs flex items-center justify-center overflow-hidden'><img src={picture} alt={title} className='w-full h-full object-cover' /></figure></li>
+      <li><figure className='w-8 h-8 relative rounded-xs flex items-center justify-center overflow-hidden'><img src={picture} alt={title} className='w-full h-full object-cover'/>
+      <PlayBtn isPlaying={isPlaying}/>
+      </figure></li>
       </div>
       <li className='text-white/80 hover:text-white duration-400 flex w-1/3 text-start justify-start items-center capitalize font-normal text-xs lg:text-[15px]'>{title}</li>
       <li className='w-5 h-5 flex items-center justify-center'>
