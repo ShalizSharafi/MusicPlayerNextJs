@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+
+
+@theme inline {
+ --color-bareBlack:#535250;
+ --color-bareGray:#807E7A;
+ --color-fixedItemsBg:#121212;
+}
+
+
+
+
+
+body {
+  background-color: black;
+  
+}
+
+@layer base{
+ @font-face {
+  font-family:Inter ;
+  src: url(../fonts/Roboto-VariableFont_wdth\,wght.ttf);
+ }
+ body{
+  font-family: Inter;
+ }
+}
+
+
+@layer utilities{
+  .row{
+    @apply flex flex-wrap w-full
+  }
+}
