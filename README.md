@@ -1,36 +1,134 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🎵 sofar — Music Streaming Web App
 
-## Getting Started
+A modern music streaming web application built with **Next.js**, inspired by platforms such as Spotify and Deezer.
 
-First, run the development server:
+The project uses the **Deezer API** to provide artists, albums, tracks, playlists, radios, and music previews, with a responsive interface designed for both desktop and mobile screens.
+
+## 🎧 Live Demo
+
+**[→ Open sofar](https://music-player-next-js-orpin.vercel.app/)**
+
+<img width="1524" height="954" alt="download" src="https://github.com/user-attachments/assets/00d473b1-2568-478f-b1ed-32db36266614" />
+
+
+## ✨ Features
+
+- 🎵 Browse music using the Deezer API
+- 🎤 Explore artists and their popular tracks
+- 💿 Browse albums and album details
+- 📻 Explore radio stations
+- 🎶 Browse playlists and tracks
+- 🔎 Search for music
+- ▶️ Play 30-second track previews
+- ⏸️ Play / pause audio
+- 🎚️ Seek through the currently playing track
+- 📱 Responsive design for different screen sizes
+- 🎨 Dynamic backgrounds and styling based on the selected content
+- ⚡ Client-side audio state management with Zustand
+
+## 🛠️ Built With
+
+- **Next.js**
+- **React**
+- **JavaScript**
+- **Tailwind CSS**
+- **Material UI (MUI)**
+- **Zustand**
+- **Deezer API**
+- **Vercel**
+
+## 🎯 Project Highlights
+
+### Global Audio Player
+
+The application uses a single global audio player rather than creating a separate audio element for every track.
+
+The currently playing track is managed through **Zustand**, allowing different parts of the application to interact with the same player state.
+
+### Dynamic Content
+
+Most of the application's music content is fetched dynamically from the Deezer API, including:
+
+- Artists
+- Albums
+- Tracks
+- Playlists
+- Radios
+- Genres
+
+### Responsive UI
+
+The interface is designed to adapt to different screen sizes using **Tailwind CSS**, with additional components from **Material UI** where needed.
+
+## 📂 Project Structure
+
+```text
+app/
+├── (dynamicPages)/
+│   ├── [slug]/
+│   ├── artist/[id]/top/
+│   ├── album/[id]/
+│   ├── playlist/[id]/
+│   ├── radio/[id]/
+│   └── track/[id]/
+│
+├── components/
+│   ├── AudioPlayer/
+│   ├── ContentLayout/
+│   ├── RadioComponents/
+│   └── ...
+│
+├── store/
+│   └── PlayerStore.js
+│
+└── layout.js
+```
+
+## 🚀 Getting Started
+
+Clone the repository:
+
+```bash
+git clone https://github.com/ShalizSharafi/sofar.git
+```
+
+Navigate into the project:
+
+```bash
+cd sofar
+```
+
+Install the dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## 🌐 Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The project is deployed with **Vercel**.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Live Demo:**  
+https://music-player-next-js-orpin.vercel.app/
 
-## Deploy on Vercel
+## 👩🏻‍💻 Author
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Shalizeh Sharafi**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Computer Engineering graduate and junior front-end developer interested in building modern, responsive web applications.
+
+[GitHub](https://github.com/ShalizSharafi)
