@@ -16,7 +16,7 @@ export default function ContentHero({src,title,bgColor,artistName,year,count,dur
       }
 
   return (
-    <div className='w-full flex flex-wrap rounded-[5px] py-2.5 lg:py-0 mt-12' style={artistName && backgroundStyle}>
+    <div className='w-full flex flex-wrap rounded-[5px] py-2.5 lg:py-0 mt-12' style={ backgroundStyle}>
       <figure className='w-42 lg:w-52 h-42 lg:h-52 flex items-center justify-center'>
        <img className='w-2/3 h-2/3 object-cover rounded-xs' src={src} alt={title} />
       </figure>

@@ -8,11 +8,12 @@ import React, { Suspense } from 'react'
 async function DynamicRadio({params}) {
        const {id} = await params
        const data = await getDeezer(`radio/${id}`)
-       console.log('data: ', data)
+       const tracks = await getDeezer(`radio/${id}/tracks`)
+       console.log('tracks: ', tracks)
        if(data.error) notFound()
   return (
     <ContentLayout src={data.picture} bgColor={radioColors[data.id] ?? fallbackColor} title={data.title} type={data.type} artistId={data.id} topic={data.type} >
-      <Radio radio={data}/>
+      <Radio radio={tracks}/>
     </ContentLayout>
   )
 }
