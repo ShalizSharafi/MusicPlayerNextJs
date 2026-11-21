@@ -1,23 +1,28 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import PlayBtn from '../RadioComponents/PlayBtn'
 import usePlayerStore from '@/app/store/PlayerStore'
 /////rows
-export default function ListContent({title,picture,time,index,id,preview}) {
+export default function ListContent({title,picture,time,index,id,preview,tracks}) {
 
   const playTrack = usePlayerStore(state=>state.playTrack) //state isn't the properties themselves. It's the whole current Zustand store state,
+
+  /////prev and next btns part
+  const setTracks = usePlayerStore(state=>state.setTracks)
+  useEffect(()=>{
+    setTracks(tracks)
+  },[tracks,setTracks]) //The useEffect makes sure Zustand gets the track list after the component renders, instead of updating the store during rendering.
 
   const currentTrackId = usePlayerStore(state=>state.currentTrackId)
   const isPlayingState = usePlayerStore(state=>state.isPlaying)
   const isPlaying = id === currentTrackId && isPlayingState //Then we can calculate whether this row is the active one:
 
   console.log(currentTrackId, preview)
-
   // id of this row === currentTrackId in Zustand → isPlaying is true → PlayBtn shows Pause.
-
+ 
   return (
     <ul  onClick={() => {
-    console.log('clicked:', id)
+    // console.log('clicked:', id)
     playTrack(id,preview)
   }} className='w-full cursor-pointer justify-between flex items-center p-5 bg-bareGray/20 rounded-[10px] hover:bg-bareGray/40 duration-400 '>
       <div className='flex items-center gap-5'>

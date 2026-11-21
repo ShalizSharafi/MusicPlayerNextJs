@@ -18,6 +18,7 @@ export default function Radio({radio={}}) {
         id={track.id}
         preview={track.preview}
         index={i + 1}
+        tracks={radio} //the entire radio tracklist for the next prev btns
       />
     )
   })
