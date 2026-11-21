@@ -19,7 +19,7 @@ export default function Artist({popularTracks=[],popularAlbums=[]}) {
       {/* /////// other parts for the artist section */}
        <ArtistTitle artistTitle='Popular Albums'/>
       {/* /////popular albums */}
-       <div className='grid grid-cols-3 md:grid-cols-4 xl:grid-cols-5 pt-5 lg:pt-8 gap-5'>
+       <div className='grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 pt-5 lg:pt-8 gap-5'>
               {popularAlbums.map((val,i)=>{
               return(
                     <SlugAlbums key={`${val.id}-${i}`} cover={val.cover} albumTitle={val.title} id={val.id} artistTitle='Popular Albums'/> 

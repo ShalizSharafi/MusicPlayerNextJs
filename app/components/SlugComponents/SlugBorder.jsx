@@ -9,7 +9,7 @@ export default function SlugBorder({children,topic,bgColor}) {
     : undefined
 }>
      <SlugTitles topic={topic}/>
-     <div className={`grid grid-cols-3 md:grid-cols-4 xl:grid-cols-5 pt-5 lg:pt-8 gap-5 ${topic === 'artists' ? 'grid-cols-4 md:grid-cols-5 xl:grid-cols-7 gap-8' : 'grid-cols-3 md:grid-cols-4 xl:grid-cols-5'}`}> 
+     <div className={`grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 pt-5 lg:pt-8 gap-5 ${topic === 'artists' ? 'grid-cols-4 md:grid-cols-5 xl:grid-cols-7 gap-8' : 'grid-cols-2 md:grid-cols-4 xl:grid-cols-5'}`}> 
       {children}
      </div>
     </div>
