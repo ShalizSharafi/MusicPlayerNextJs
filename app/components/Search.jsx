@@ -16,7 +16,7 @@
 
 "use client";
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import InputBase from '@mui/material/InputBase';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
@@ -28,6 +28,19 @@ export default function Search({searchOpen, dispatch}) {
     dispatch({type:'searchClose'})
   }
 
+  /////search input
+
+  const [query,setQuery] = useState('')
+  const [results,setResults] = useState([])
+
+  useEffect(()=>{
+    if(query.length < 2) return
+
+    fetch(`/api-search?q=${encodeURIComponent(query)}`)
+    .then(res=>res.json())
+    .then(data=>setResults(data))
+  },[query])
+
   const inputRef = useRef(null)
 
   useEffect(()=>{
@@ -38,6 +51,7 @@ export default function Search({searchOpen, dispatch}) {
     <div className={`lg:w-5/16 p-2.5 lg:flex items-center ${searchOpen? 'flex w-full' :'hidden w-0'}`}>
       <form onSubmit={handleSubmit} className='w-full h-3/4 hover:bg-white/40 backdrop-blur-2xl bg-bareBlack flex items-center rounded-4xl overflow-hidden duration-400'>
         <InputBase
+        onChange={(e)=>setQuery(e.target.value)}
           fullWidth inputRef={inputRef}
           placeholder='What do you want to play?'
           startAdornment={
@@ -58,6 +72,17 @@ export default function Search({searchOpen, dispatch}) {
           }}
         />
       </form>
+      {/* {results.length > 0 && (
+  <div className=' text-white '>
+    {results.map((val)=>{
+      return(
+        <div key={val.id}>
+          {val.title}
+        </div>
+      )
+    })}
+  </div>
+)} */}
     </div>
   );
 }
