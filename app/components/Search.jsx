@@ -20,26 +20,23 @@ import React, { useEffect, useRef, useState } from 'react';
 import InputBase from '@mui/material/InputBase';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
+import { useRouter } from 'next/navigation';
 
 export default function Search({searchOpen, dispatch}) {
+  const router = useRouter()
 
   const handleSubmit = (e)=>{
     e.preventDefault()
+    router.push(`/search?q=${encodeURIComponent(query)}`)
     dispatch({type:'searchClose'})
   }
 
   /////search input
 
   const [query,setQuery] = useState('')
-  const [results,setResults] = useState([])
+  // const [results,setResults] = useState([])
 
-  useEffect(()=>{
-    if(query.length < 2) return
-
-    fetch(`/api-search?q=${encodeURIComponent(query)}`)
-    .then(res=>res.json())
-    .then(data=>setResults(data))
-  },[query])
+ 
 
   const inputRef = useRef(null)
 
