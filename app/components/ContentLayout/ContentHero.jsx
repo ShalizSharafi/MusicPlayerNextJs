@@ -22,7 +22,7 @@ export default function ContentHero({src,title,bgColor,artistName,year,count,dur
       </figure>
       <div className='w-full gap-2.5 lg:w-[calc(100%-208px)] justify-start flex flex-wrap content-start  p-5'>
        <span className='text-white font-normal text-start w-full flex items-center justify-start capitalize'>{type}</span>
-      { artistName ? (<h2 className='text-3xl lg:text-5xl text-white capitalize flex w-full items-center justify-start text-start font-bold'>{artistName}</h2>) : (<h2 className='text-3xl lg:text-5xl text-white capitalize flex w-full items-center justify-start text-start font-bold'>{title}</h2>) }
+      { isArtist ? (<h2 className='text-3xl lg:text-5xl text-white capitalize flex w-full items-center justify-start text-start font-bold'>{artistName}</h2>) : (<h2 className='text-3xl lg:text-5xl text-white capitalize flex w-full items-center justify-start text-start font-bold'>{title}</h2>) }
        <ul className='w-full  flex items-center justify-start gap-2.5 *:text-xs *:lg:text-[15px] *:hover:text-white *:duration-400 '>
               {artistName && (
                      <li className='text-white/70 capitalize gap-2.5 flex items-center'><figure className='w-5 h-5 rounded-full flex items-center  justify-center  overflow-hidden'>
