@@ -29,12 +29,14 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 const cards = [
-  { title: 'Create your first playlist', text: "It's easy, we'll help you", label: 'Create playlist' },
-  { title: "Let's find some podcasts to follow", text: "We'll keep you updated on new episodes.", label: 'Browse podcasts' },
+  { title: 'Listen to your favorite ones', text: "You've got a taste", label: 'Your Favorites',href:'/favorites' },
+  { title: 'Create your first playlist', text: "It's easy, we'll help you", label: 'Create playlist',href:'#' },
+  { title: "Let's find some podcasts to follow", text: "We'll keep you updated on new episodes.", label: 'Browse podcasts',href:'#' }
+  
 ];
 
 
-function PlaylistCard({ title,text,label,sx }) {
+function PlaylistCard({ title,text,label,sx,href }) {
   return (
     <Box
       className='row content-start gap-4 bg-bareBlack'
@@ -58,7 +60,7 @@ function PlaylistCard({ title,text,label,sx }) {
 
       <Button
         component={NextLink}
-        href='#'
+        href={href}
         disableElevation
         sx={{
           px: '16px',
@@ -85,10 +87,10 @@ function PlaylistCard({ title,text,label,sx }) {
 
 export default function SidebarMiddle() {
   return (
-    <div className='w-full h-50'>
-      <div className='w-full h-full flex flex-wrap overflow-scroll gap-10'>
+    <div className='w-full p-2 h-50'>
+      <div className='w-full h-full flex flex-wrap overflow-scroll gap-5'>
        {cards.map((card)=>(
-        <PlaylistCard key={card.title} title={card.title} text={card.text} label={card.label}/>
+        <PlaylistCard key={card.title} title={card.title} text={card.text} label={card.label} href={card.href}/>
        ))}
       </div>
     </div>
