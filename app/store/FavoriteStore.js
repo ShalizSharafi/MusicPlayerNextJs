@@ -25,7 +25,7 @@ const useFavoriteStore = create(
 
       isFavorite: (
         id,
-        type, //check wheather its liked or not
+        type //check wheather its liked or not
       ) => get().favorites.some((item) => item.id === id && item.type === type), //get() reads the current store
 
       toggleFavorites: (item) => //combining like and unlike function

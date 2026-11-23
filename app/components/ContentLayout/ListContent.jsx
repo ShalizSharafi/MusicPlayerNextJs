@@ -3,10 +3,16 @@ import React, { useEffect } from 'react'
 import PlayBtn from '../RadioComponents/PlayBtn'
 import usePlayerStore from '@/app/store/PlayerStore'
 import LikeSVG from './LikeSVG'
+import useFavoriteStore from '@/app/store/FavoriteStore'
 /////rows
 export default function ListContent({title,picture,time,index,id,preview,tracks}) {
 
   const playTrack = usePlayerStore(state=>state.playTrack) //state isn't the properties themselves. It's the whole current Zustand store state,
+  
+  const isFavorite = useFavoriteStore((state)=>state.isFavorite(id,'track'))
+  const toggleFavorites = useFavoriteStore((state)=>state.toggleFavorites)
+
+
 
   /////prev and next btns part
   const setTracks = usePlayerStore(state=>state.setTracks)
@@ -33,8 +39,20 @@ export default function ListContent({title,picture,time,index,id,preview,tracks}
       </figure></li>
       </div>
       <li className='text-white/80 hover:text-white duration-400 flex w-1/3 text-start justify-start items-center capitalize font-normal text-xs lg:text-[15px]'>{title}</li>
-      <li className='w-5 h-5 flex items-center justify-center'>
-       <LikeSVG/>
+      <li onClick={(e)=>{
+        e.stopPropagation()
+        toggleFavorites({
+         title,
+         image: picture,
+         time,
+         index,
+         id,
+         preview,
+         tracks,
+         type:'track'
+        })
+      }} className='w-5 h-5 flex items-center justify-center'>
+       <LikeSVG liked={isFavorite}/>
       </li>
       <li className='text-white/50 text-xs lg:text-[15px]'>{time}</li>
     </ul>
