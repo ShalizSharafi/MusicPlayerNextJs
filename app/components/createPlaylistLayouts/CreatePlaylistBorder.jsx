@@ -12,6 +12,11 @@ const reducer = (state,action)=>{
                      return {...state, title:action.value}
               case 'SET_DESC':
                      return {...state, desc:action.value}
+              case 'RESET' :
+                     return {image:null,
+                            title:'',
+                            desc:''
+                      }       
               default:
                      return state          
        }
@@ -24,12 +29,13 @@ export default function CreatePlaylistBorder() {
        const handleSave = (e)=>{
               e.preventDefault() //prevents the form from refreshing the page
               addPlaylist({
-                     id:Date.now(),//for unique id
+                     userCreatedPlaylistId:Date.now(),//for unique id
                      title:state.title,
                      desc:state.desc,
                      image:state.image,
-                     Tracks :[]
+                     playlistItems :[]
               })
+              dispatch({type:'RESET'})
        }
 
   return (

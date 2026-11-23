@@ -1,0 +1,16 @@
+export const userPlaylistColors = {
+  1: '#FF6B6B',
+  2: '#FF9F68',
+  3: '#FF8C42',
+  4: '#FFD166',
+  5: '#E9F45B',
+  6: '#66DDAA',
+  7: '#70C98B',
+  8: '#4ECDC4',
+  9: '#54BCEB',
+  10: '#648DE5',
+  11: '#A78BFA',
+  12: '#C084FC',
+  13: '#F472B6',
+  14: '#FB7185',
+}
