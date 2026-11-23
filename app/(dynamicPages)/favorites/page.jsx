@@ -27,7 +27,7 @@ export function DynamicFavorites() {
        <FavoriteTitle topic={type} />
        <FavoriteLayout>
               {/* ///tracks */}
-             {(type === 'all' || type === 'track') &&(
+             {(type === 'all' || type === 'track') && tracks.length > 0 &&(
               <>
                <FavoriteTitle topic='tracks' />
               {tracks.map((item,i)=>{
@@ -41,7 +41,7 @@ export function DynamicFavorites() {
              )}
               
                {/* ///albums */}
-              {(type === 'all' || type === 'album') && (
+              {(type === 'all' || type === 'album') && albums.length > 0 && (
                      <>
                       <FavoriteTitle topic='albums' />
               {albums.map((item,i)=>{
@@ -55,7 +55,7 @@ export function DynamicFavorites() {
               )}
 
               {/* ///playlists */}
-              {(type === 'all' || type === 'playlist') &&(
+              {(type === 'all' || type === 'playlist') && playlists.length > 0 &&(
                      <>
                       <FavoriteTitle topic='playlists' />
               {playlists.map((item,i)=>{
@@ -69,7 +69,7 @@ export function DynamicFavorites() {
               )}
 
               {/* ///radios */}
-              {(type === 'all' || type === 'radio') &&(
+              {(type === 'all' || type === 'radio') && radios.length > 0 &&(
                      <>
                       <FavoriteTitle topic='radios' />
               {radios.map((item,i)=>{
