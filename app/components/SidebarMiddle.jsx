@@ -30,7 +30,7 @@ import Button from '@mui/material/Button';
 
 const cards = [
   { title: 'Listen to your favorite ones', text: "You've got a taste", label: 'Your Favorites',href:'/favorites' },
-  { title: 'Create your first playlist', text: "It's easy, we'll help you", label: 'Create playlist',href:'#' },
+  { title: 'Listen to your playlists', text: "Nice collection by the way!", label: 'Your playlists',href:'#' },
   { title: "Let's find some podcasts to follow", text: "We'll keep you updated on new episodes.", label: 'Browse podcasts',href:'#' }
   
 ];

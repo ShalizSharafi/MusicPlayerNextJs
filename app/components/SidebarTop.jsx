@@ -69,7 +69,7 @@ export default function SidebarTop() {
         >
           <Link
             component={NextLink}
-            href='#'
+            href={`/playlist/create`}
             underline='none'
             sx={{
               width: '100%',
