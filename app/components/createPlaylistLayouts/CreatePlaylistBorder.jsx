@@ -2,6 +2,7 @@
 import React, { useReducer } from 'react'
 import CreatePlaylistLayout from './CreatePlaylistLayout'
 import CreatePlaylistPreview from './CreatePlaylistPreview'
+import userCreatedPlaylist from '@/app/store/UserCreatedPlaylist'
 
 const reducer = (state,action)=>{
        switch(action.type){
@@ -17,13 +18,23 @@ const reducer = (state,action)=>{
 }
 
 export default function CreatePlaylistBorder() {
-       // const [image, setImage] = useState('')
-       // const [title,setTitle] = useState('')
-       // const [desc,setDesc] = useState('')
        const [state,dispatch] = useReducer(reducer,{image:null, title:'', desc:''})
+       const addPlaylist = userCreatedPlaylist((state)=>state.addPlaylist)
+
+       const handleSave = (e)=>{
+              e.preventDefault() //prevents the form from refreshing the page
+              addPlaylist({
+                     id:Date.now(),//for unique id
+                     title:state.title,
+                     desc:state.desc,
+                     image:state.image,
+                     Tracks :[]
+              })
+       }
+
   return (
     <div className='px-5 md:px-10 w-full flex flex-wrap'>
-    <CreatePlaylistLayout state={state} dispatch={dispatch}/>
+    <CreatePlaylistLayout handleSave={handleSave} state={state} dispatch={dispatch}/>
     <CreatePlaylistPreview state={state}/>
     </div>
   )
