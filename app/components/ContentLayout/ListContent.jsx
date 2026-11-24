@@ -1,9 +1,12 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PlayBtn from '../RadioComponents/PlayBtn'
 import usePlayerStore from '@/app/store/PlayerStore'
 import LikeSVG from './LikeSVG'
 import useFavoriteStore from '@/app/store/FavoriteStore'
+import PlusSvg from './PlusSvg'
+import PlaylistMenu from './PlayListMenu'
+import userCreatedPlaylist from '@/app/store/UserCreatedPlaylist'
 /////rows
 export default function ListContent({title,picture,time,index,id,preview,tracks}) {
 
@@ -11,7 +14,10 @@ export default function ListContent({title,picture,time,index,id,preview,tracks}
   
   const isFavorite = useFavoriteStore((state)=>state.isFavorite(id,'track'))
   const toggleFavorites = useFavoriteStore((state)=>state.toggleFavorites)
-
+  const [showPlaylist,setShowPlaylist] = useState(false)
+  const playlists = userCreatedPlaylist((state) => state.playlists)
+  const [anchorEl, setAnchorEl] = useState(null)
+  const isAdded = playlists.some((p)=>p?.playlistItems.some((val)=>val.id === id && val.type === 'track'))
 
 
   /////prev and next btns part
@@ -53,6 +59,23 @@ export default function ListContent({title,picture,time,index,id,preview,tracks}
         })
       }} className='w-5 h-5 flex items-center justify-center'>
        <LikeSVG liked={isFavorite}/>
+      </li>
+
+      <li onClick={(e)=>{e.stopPropagation()
+  setAnchorEl(anchorEl ? null : e.currentTarget)
+      }
+      } className='w-5 h-5 flex items-center justify-center'>
+       <PlusSvg added={isAdded}/>
+         <PlaylistMenu playlists={playlists} open={Boolean(anchorEl)} onClose={() => setAnchorEl(null)} anchorEl={anchorEl} item={{
+  title,
+  image: picture,
+  time,
+  index,
+  id,
+  preview,
+  tracks,
+  type: 'track'
+}}/>
       </li>
       <li className='text-white/50 text-xs lg:text-[15px]'>{time}</li>
     </ul>

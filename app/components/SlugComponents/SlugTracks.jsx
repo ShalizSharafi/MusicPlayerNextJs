@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import LikeSVG from '../ContentLayout/LikeSVG'
 import useFavoriteStore from '@/app/store/FavoriteStore'
+import PlusSvg from '../ContentLayout/PlusSvg'
 
 export default function SlugTracks({trackName,artist,album,src,id,albumId,artistId}) {
   const router = useRouter()
@@ -32,6 +33,9 @@ export default function SlugTracks({trackName,artist,album,src,id,albumId,artist
         })
       }} className='w-6 h-6 absolute top-1 hidden items-center justify-center right-1 rounded-[5px] group-hover:flex duration-400'>
         <LikeSVG liked={isFavorite}/>
+      </span>
+      <span onClick={(e)=>e.stopPropagation()} className='w-6 h-6 absolute top-1 hidden items-center justify-center left-1 rounded-[5px] group-hover:flex duration-400'>
+        <PlusSvg added={false}/>
       </span>
     </div>
   )

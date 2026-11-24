@@ -5,7 +5,7 @@ import Link from 'next/link'
 import userCreatedPlaylist from '@/app/store/UserCreatedPlaylist'
 import { userPlaylistColors } from '@/app/colors/usermadePlaylistColors'
 
-export default function UserMadePlaylistsCards({bgColor}) {
+export default function UserMadePlaylistsCards() {
   const playlists = userCreatedPlaylist((state)=>state.playlists)
 
   return(
@@ -19,7 +19,7 @@ export default function UserMadePlaylistsCards({bgColor}) {
       <div className='w-full flex-wrap  gap-2'>
        <h3 className='w-full flex items-center justify-start text-start text-[12px] lg:text-[14px] font-bold text-white'>{p.title}</h3>
        <h4 className='w-full flex items-center justify-start text-start text-xs text-white/60 hover:text-white duration-400'>Made by you</h4>
-       <span className='w-full flex items-center justify-start text-start text-xs font-bold text-white capitalize'>{p.playlistItems.length} tracks</span>
+       <span className='w-full flex items-center justify-start text-start text-xs font-bold text-white capitalize'>{p.playlistItems?.length ?? 0 } tracks</span>
       </div>
     </Link>
                )
