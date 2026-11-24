@@ -3,6 +3,7 @@ import React, { useReducer } from 'react'
 import CreatePlaylistLayout from './CreatePlaylistLayout'
 import CreatePlaylistPreview from './CreatePlaylistPreview'
 import userCreatedPlaylist from '@/app/store/UserCreatedPlaylist'
+import { userPlaylistColors } from '@/app/colors/usermadePlaylistColors'
 
 const reducer = (state,action)=>{
        switch(action.type){
@@ -25,6 +26,7 @@ const reducer = (state,action)=>{
 export default function CreatePlaylistBorder() {
        const [state,dispatch] = useReducer(reducer,{image:null, title:'', desc:''})
        const addPlaylist = userCreatedPlaylist((state)=>state.addPlaylist)
+       const playlists = userCreatedPlaylist((state) => state.playlists)
 
        const handleSave = (e)=>{
               e.preventDefault() //prevents the form from refreshing the page
@@ -33,7 +35,8 @@ export default function CreatePlaylistBorder() {
                      title:state.title,
                      desc:state.desc,
                      image:state.image,
-                     playlistItems :[]
+                     playlistItems :[],
+                     bgColor: userPlaylistColors[(playlists.length % 14) + 1]
               })
               dispatch({type:'RESET'})
        }

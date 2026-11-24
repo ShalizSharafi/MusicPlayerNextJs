@@ -8,7 +8,7 @@ import useFavoriteStore from '@/app/store/FavoriteStore'
 import PlusSvg from '../ContentLayout/PlusSvg'
 import userCreatedPlaylist from '@/app/store/UserCreatedPlaylist'
 import PlaylistMenu from '../ContentLayout/PlayListMenu'
-import { setInCacheMap } from 'next/dist/client/components/segment-cache/cache-map'
+
 
 export default function SlugPlaylists({playlistTitle,picture,user,count,bgColor,id}) {
   const router = useRouter()
@@ -16,7 +16,7 @@ export default function SlugPlaylists({playlistTitle,picture,user,count,bgColor,
   const isFavorite = useFavoriteStore((state)=>state.isFavorite(id,'playlist'))
   const playlists = userCreatedPlaylist((state)=>state.playlists)
   const isAdded = playlists.some((val)=>
-  val?.playlistItems?.some((p)=>p.id === id && p.type === 'radio')
+  val?.playlistItems?.some((p)=>p.id === id && p.type === 'playlist')
   )
 
   const [anchorEl,setAnchorEl] = useState(null)
