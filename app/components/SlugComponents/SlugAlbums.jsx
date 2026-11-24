@@ -1,16 +1,23 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import LikeSVG from '../ContentLayout/LikeSVG'
 import useFavoriteStore from '@/app/store/FavoriteStore'
 import PlusSvg from '../ContentLayout/PlusSvg'
+import userCreatedPlaylist from '@/app/store/UserCreatedPlaylist'
+import PlaylistMenu from '../ContentLayout/PlayListMenu'
 // import usePlayerStore from '@/app/store/PlayerStore'
 
 export default function SlugAlbums({cover,albumTitle,artist,position,id}) {
   const router = useRouter()
   const toggleFavorites = useFavoriteStore((state)=>state.toggleFavorites)//the function axpects one (item) so inside the onClick we pass one object!
   const isFavorite = useFavoriteStore((state)=>state.isFavorite(id,'album'))
+  const playlists = userCreatedPlaylist((state)=>state.playlists)
+  const isAdded = playlists.some((val)=>
+  val?.playlistItems?.some((p)=>p.id === id && p.type === 'album')
+  )
+  const [anchorEl,setAnchorEl] = useState(null)
   return (
     <div onClick={()=>router.push(`/album/${id}`)} className={`w-full bg-black rounded-[10px] p-2.5 flex flex-wrap content-start cursor-pointer gap-2.5 hover:bg-bareGray/20 duration-400 hover:scale-95 relative group `}>
       <figure className='w-full h-30  rounded-[5px] overflow-hidden lg:h-25 flex items-center justify-center p-1 bg-white/15 '>
@@ -34,8 +41,19 @@ export default function SlugAlbums({cover,albumTitle,artist,position,id}) {
       }} className='w-6 h-6 absolute top-1 hidden items-center justify-center right-1 rounded-[5px] group-hover:flex duration-400'>
               <LikeSVG liked={isFavorite}/>
             </span>
-             <span onClick={(e)=>e.stopPropagation()} className='w-6 h-6 absolute top-1 hidden items-center justify-center left-1 rounded-[5px] group-hover:flex duration-400'>
-                    <PlusSvg added={false}/>
+             <span onClick={(e)=>{
+              e.stopPropagation()
+              setAnchorEl(anchorEl ? null : e.currentTarget)
+             }} className='w-6 h-6 absolute top-1 hidden items-center justify-center left-1 rounded-[5px] group-hover:flex duration-400'>
+                    <PlusSvg added={isAdded}/>
+                    <PlaylistMenu  anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={()=>setAnchorEl(null)} item={{
+                      type :'album',
+                      cover,
+                      albumTitle,
+                      artist,
+                      position,
+                      id
+                    }} playlists={playlists}/>
                   </span>
     </div>
   )
