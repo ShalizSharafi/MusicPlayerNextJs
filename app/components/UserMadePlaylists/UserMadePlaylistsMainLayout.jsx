@@ -40,7 +40,7 @@ console.log('is array:', Array.isArray(filteredItems))
   <UserMadePlaylistsFilter userCreatedPlaylistId={userCreatedPlaylistId} />
       ) }
       {playlist?.playlistItems?.length === 0 && (       
-  <UserMadeEmpty/>
+  <UserMadeEmpty title='Nothing is added yet ' description='Add some tracks, albums, or playlists to get started.' href={`/playlist/create`}/>
       ) }
 
       <UserMadePlaylistMainGrid>

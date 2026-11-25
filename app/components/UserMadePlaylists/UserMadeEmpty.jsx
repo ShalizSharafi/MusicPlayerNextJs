@@ -5,10 +5,9 @@ import LibraryMusicIcon from '@mui/icons-material/LibraryMusic'
 import Typography from '@mui/material/Typography'
 import Link from 'next/link'
 
-export default function UserMadeEmpty() {
-       return(
-             <Link href={`/playlist/create`} className='w-full'>
-              <Card
+export default function UserMadeEmpty({title,description,href}) {
+  const card = (<div className='w-full'>
+    <Card
     sx={{
       width: '100%',
       backgroundColor: 'rgba(255,255,255,0.05)',
@@ -30,17 +29,24 @@ export default function UserMadeEmpty() {
       <LibraryMusicIcon sx={{ fontSize: 50, color: 'rgba(255,255,255,0.4)' }} />
 
       <Typography variant="h6">
-        This playlist is empty
+        {title}
       </Typography>
 
       <Typography sx={{ color: 'rgba(255,255,255,0.5)', fontSize: 14 }}>
-        Add some tracks, albums, or playlists to get started.
+        {description}
       </Typography>
     </CardContent>
   </Card>
-             </Link>
-       )       
-               
+  </div>)
+      return href ? (
+    <Link href={href} className='w-full'>
+      {card}
+    </Link>
+  ) : (
+    <div className='w-full'>
+      {card}
+    </div>
+  )     
        
 }
   

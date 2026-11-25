@@ -9,8 +9,10 @@ export  async function DynamicUserPlaylistContent({params,searchParams}) {
   const {type} = await searchParams
   return (
     <>
+        <div className='w-full px-5 lg:px-10'>
      <UserMadePlaylistsHero userCreatedPlaylistId={userCreatedPlaylistId}/>
-      
+          
+          </div>      
       <UserMadePlaylistsMainLayout userCreatedPlaylistId={userCreatedPlaylistId} type={type} />
     </>
   )

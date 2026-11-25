@@ -47,7 +47,7 @@ export async function SearchContent({searchParams}) {
       <SearchHero q={q}/>
       <SearchTitle topic={type}/>
 
-      <SearchLayout type={type}>
+      <SearchLayout results={results} type={type}>
 
         {type === 'all' ? (
           <>
