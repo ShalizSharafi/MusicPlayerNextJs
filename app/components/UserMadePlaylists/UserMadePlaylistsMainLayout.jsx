@@ -7,6 +7,8 @@ import UserMadePlaylistsTitle from './UserMadePlaylistsTitle'
 import SlugAlbums from '../SlugComponents/SlugAlbums'
 import SlugPlaylists from '../SlugComponents/SlugPlaylists'
 import SlugRadio from '../SlugComponents/SlugRadio'
+import UserMadeEmpty from './UserMadeEmpty'
+import UserMadePlaylistsFilter from './UserMadePlaylistsFilter'
 
 export default function UserMadePlaylistsMainLayout({userCreatedPlaylistId}) {
   const playlists = userCreatedPlaylist((state)=>state.playlists)
@@ -14,10 +16,20 @@ export default function UserMadePlaylistsMainLayout({userCreatedPlaylistId}) {
     val.userCreatedPlaylistId === Number(userCreatedPlaylistId)
   )
   
+  // const filteredItems = type === 'all' ? playlist?.playlistItems : playlist?.playlistItems?.filter((val)=>val.type === type)
 
   console.log('playlist items: ', playlist?.playlistItems)
   return (
-    <div className='w-full p-5 lg:p-10 border border-white *:border *:border-white'>
+    <div className='w-full p-5 lg:p-10 '>
+
+      {/* /////if there's no item added */}
+      {playlist?.playlistItems?.length > 0 && (       
+  <UserMadePlaylistsFilter userCreatedPlaylistId={userCreatedPlaylistId} />
+      ) }
+      {playlist?.playlistItems?.length === 0 && (       
+  <UserMadeEmpty/>
+      ) }
+
       <UserMadePlaylistMainGrid>
       {/* {tracks} */}
       {(playlist?.playlistItems?.length > 0 && 
