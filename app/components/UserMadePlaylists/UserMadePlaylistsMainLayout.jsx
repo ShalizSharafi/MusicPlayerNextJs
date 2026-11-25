@@ -10,13 +10,26 @@ import SlugRadio from '../SlugComponents/SlugRadio'
 import UserMadeEmpty from './UserMadeEmpty'
 import UserMadePlaylistsFilter from './UserMadePlaylistsFilter'
 
-export default function UserMadePlaylistsMainLayout({userCreatedPlaylistId}) {
+export default function UserMadePlaylistsMainLayout({userCreatedPlaylistId,type}) {
   const playlists = userCreatedPlaylist((state)=>state.playlists)
   const playlist = playlists.find((val)=>
     val.userCreatedPlaylistId === Number(userCreatedPlaylistId)
   )
   
-  // const filteredItems = type === 'all' ? playlist?.playlistItems : playlist?.playlistItems?.filter((val)=>val.type === type)
+  const types ={
+    all: 'all',
+    track : 'track',
+    album:'album',
+    playlist:'playlist',
+    radio:'radio'
+  }
+
+  const filteredItems = !type || type === types.all ? playlist?.playlistItems : playlist?.playlistItems.filter((val)=>val.type === type)
+
+
+  console.log('type:', type)
+console.log('filteredItems:', filteredItems)
+console.log('is array:', Array.isArray(filteredItems))
 
   console.log('playlist items: ', playlist?.playlistItems)
   return (
@@ -33,9 +46,9 @@ export default function UserMadePlaylistsMainLayout({userCreatedPlaylistId}) {
       <UserMadePlaylistMainGrid>
       {/* {tracks} */}
       {(playlist?.playlistItems?.length > 0 && 
-        playlist?.playlistItems.some((val)=>val.type === 'track')
+        filteredItems?.some((val)=>val.type === 'track')
       ) && <UserMadePlaylistsTitle topic='tracks'/>}
-      { playlist?.playlistItems.map((val)=>(
+      { filteredItems?.map((val)=>(
         val.type === 'track' && (
           <SlugTracks key={val.id} trackName={val.trackName} artist={val.artist} album={val.album} src={val.src} id={val.id} albumId={val.albumId} artistId={val.artistId} />
         )
@@ -43,9 +56,9 @@ export default function UserMadePlaylistsMainLayout({userCreatedPlaylistId}) {
 
        {/* {albums} */}
        {(playlist?.playlistItems?.length > 0 && 
-        playlist?.playlistItems.some((val)=>val.type === 'album')
+        filteredItems?.some((val)=>val.type === 'album')
       ) && <UserMadePlaylistsTitle topic='albums'/>}
-      { playlist?.playlistItems.map((val)=>(
+      { filteredItems?.map((val)=>(
         val.type === 'album' && (
           <SlugAlbums key={val.id} cover={val.cover} albumTitle={val.albumTitle} artist={val.artist} position={val.position} id={val.id} />
         )
@@ -53,9 +66,9 @@ export default function UserMadePlaylistsMainLayout({userCreatedPlaylistId}) {
 
       {/* {playlists} */}
        {(playlist?.playlistItems?.length > 0 && 
-        playlist?.playlistItems.some((val)=>val.type === 'playlist')
+        filteredItems?.some((val)=>val.type === 'playlist')
       ) && <UserMadePlaylistsTitle topic='playlists'/>}
-      { playlist?.playlistItems.map((val)=>(
+      { filteredItems?.map((val)=>(
         val.type === 'playlist' && (
           <SlugPlaylists key={val.id} playlistTitle={val.playlistTitle} picture={val.picture} user={val.user} count={val.count} bgColor={val.bgColor} id={val.id}  />
         )
@@ -63,9 +76,9 @@ export default function UserMadePlaylistsMainLayout({userCreatedPlaylistId}) {
 
       {/* {radio} */}
        {(playlist?.playlistItems?.length > 0 && 
-        playlist?.playlistItems.some((val)=>val.type === 'radio')
+        filteredItems?.some((val)=>val.type === 'radio')
       ) && <UserMadePlaylistsTitle topic='radios'/>}
-      { playlist?.playlistItems.map((val)=>(
+      { filteredItems?.map((val)=>(
         val.type === 'radio' && (
           <SlugRadio key={val.id} picture={val.picture} radioTitle={val.radioTitle} id={val.id}  />
         )

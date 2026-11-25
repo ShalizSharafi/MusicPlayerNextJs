@@ -51,7 +51,7 @@ export async function SearchContent({searchParams}) {
 
         {type === 'all' ? (
           <>
-            <SearchTitle topic="artists" />
+            { results?.artists?.length > 0 && <SearchTitle topic="artists" />}
 
 {results.artists.map((result, i) => (
   <SlugArtists
@@ -62,7 +62,7 @@ export async function SearchContent({searchParams}) {
   />
 ))}
 
-<SearchTitle topic="tracks" />
+{results?.tracks?.length > 0 &&  <SearchTitle topic="tracks" />}
 
 {results.tracks.map((result, i) => (
   <SlugTracks
@@ -77,7 +77,7 @@ export async function SearchContent({searchParams}) {
   />
 ))}
 
-<SearchTitle topic="albums" />
+{results?.album?.length > 0 &&  <SearchTitle topic="albums" />}
 
 {results.album.map((result, i) => (
   <SlugAlbums
@@ -88,7 +88,7 @@ export async function SearchContent({searchParams}) {
   />
 ))}
 
-<SearchTitle topic="radio" />
+{results?.radio?.length > 0 &&  <SearchTitle topic="radio" />}
 
 {results.radio.map((result, i) => (
   <SlugRadio
@@ -99,7 +99,7 @@ export async function SearchContent({searchParams}) {
   />
 ))}
 
-<SearchTitle topic="playlists" />
+  {results?.playlist?.length > 0 && <SearchTitle topic="playlists" />}
 
 {results.playlist.map((result, i) => (
   <SlugPlaylists

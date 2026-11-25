@@ -11,7 +11,7 @@ export  async function DynamicUserPlaylistContent({params,searchParams}) {
     <>
      <UserMadePlaylistsHero userCreatedPlaylistId={userCreatedPlaylistId}/>
       
-      <UserMadePlaylistsMainLayout userCreatedPlaylistId={userCreatedPlaylistId}  />
+      <UserMadePlaylistsMainLayout userCreatedPlaylistId={userCreatedPlaylistId} type={type} />
     </>
   )
 }
