@@ -59,7 +59,7 @@ export default function SlugAlbums({cover,albumTitle,artist,position,id,userCrea
 
                   {userCreatedPlaylistId && (
                         <span className='w-6 h-6 absolute bottom-1 hidden items-center justify-center right-1 rounded-[5px] group-hover:flex duration-400'>
-                          <RemovePlaylistItem userCreatedPlaylistId={userCreatedPlaylistId} itemId={id} itemType='track'/>
+                          <RemovePlaylistItem userCreatedPlaylistId={userCreatedPlaylistId} itemId={id} itemType='album'/>
                         </span>
                        )}
     </div>

@@ -1,3 +1,4 @@
+import { Place } from '@mui/icons-material'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
@@ -33,7 +34,16 @@ const userCreatedPlaylist = create(
           }
         : each
     )
-  }))
+  })),
+
+
+  ///remove each card
+  removePlaylist:(userCreatedPlaylistId)=>
+       set((state)=>(
+              {
+                   playlists:state.playlists.filter((val)=>Number(val.userCreatedPlaylistId) !== Number(userCreatedPlaylistId))
+              }
+       ))
               }),
               { name: 'user-created-playlists' }
        )
