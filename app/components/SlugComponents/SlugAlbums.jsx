@@ -19,6 +19,7 @@ export default function SlugAlbums({cover,albumTitle,artist,position,id,userCrea
   val?.playlistItems?.some((p)=>p.id === id && p.type === 'album')
   )
   const [anchorEl,setAnchorEl] = useState(null)
+  const setPendingItem = userCreatedPlaylist((state)=>state.setPendingItem)
   return (
     <div onClick={()=>router.push(`/album/${id}`)} className={`w-full bg-black rounded-[10px] p-2.5 flex flex-wrap content-start cursor-pointer gap-2.5 hover:bg-bareGray/20 duration-400 hover:scale-95 relative group `}>
       <figure className='w-full h-30  rounded-[5px] overflow-hidden lg:h-25 flex items-center justify-center p-1 bg-white/15 '>
@@ -34,9 +35,10 @@ export default function SlugAlbums({cover,albumTitle,artist,position,id,userCrea
         toggleFavorites({
           cover,
           albumTitle,
+          artist,
           position,
           id,
-          artist,
+          userCreatedPlaylistId,
           type:'album'
         })
       }} className='w-6 h-6 absolute top-1 hidden items-center justify-center right-1 rounded-[5px] group-hover:flex duration-400'>
@@ -44,8 +46,22 @@ export default function SlugAlbums({cover,albumTitle,artist,position,id,userCrea
             </span>
              <span onClick={(e)=>{
               e.stopPropagation()
-              setAnchorEl(anchorEl ? null : e.currentTarget)
-             }} className='w-6 h-6 absolute top-1 hidden items-center justify-center left-1 rounded-[5px] group-hover:flex duration-400'>
+               if (playlists.length === 0) {
+    setPendingItem({
+      cover,
+      albumTitle,
+      artist,
+      position,
+      id,
+      userCreatedPlaylistId,
+      type:'album'
+    })
+    router.push('/playlist/create')
+    return
+  }
+
+  setAnchorEl(anchorEl ? null : e.currentTarget)
+}} className='w-6 h-6 absolute top-1 hidden items-center justify-center left-1 rounded-[5px] group-hover:flex duration-400'>
                     <PlusSvg added={isAdded}/>
                     <PlaylistMenu  anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={()=>setAnchorEl(null)} item={{
                       type :'album',

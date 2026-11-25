@@ -5,18 +5,22 @@ import IconButton from '@mui/material/IconButton'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined'
 import userCreatedPlaylist from '@/app/store/UserCreatedPlaylist'
 
-export default function RemovePlaylistItem({userCreatedPlaylistId,itemId,itemType}) {
+export default function RemovePlaylistItem({userCreatedPlaylistId,itemId,itemType,playlistOnly}) {
   const removePlaylistItem = userCreatedPlaylist(
     (state) => state.removePlaylistItem
   )
 
+  const removePlaylist = userCreatedPlaylist((state)=>state.removePlaylist)
   return (
     <IconButton
       onClick={(e) => {
+       e.preventDefault()
   e.stopPropagation()
-  console.log('REMOVE CLICKED')
-  console.log(userCreatedPlaylistId, itemId, itemType)
+  if(playlistOnly){
+       removePlaylist(userCreatedPlaylistId)
+  }else{
   removePlaylistItem(userCreatedPlaylistId, itemId, itemType)
+  }
 }}
       sx={{
         color: 'white',

@@ -1,6 +1,7 @@
 import React from 'react'
 import ListContent from '../ContentLayout/ListContent'
 import formatTime from './Format'
+import { trace } from 'next/dist/trace'
 
 // const formatTime = (s) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`
 
@@ -16,7 +17,7 @@ export default function Playlist({playlist=[]}) {
       {playlist.map((val,i)=>{
        return(
               <ListContent key={`${val.id}-${i}`} title={shortenTheTitle(val.title_short)} picture={val.album.cover_small}
-              time={formatTime(val.duration)} index={i+1} id={val.id} preview={val.preview} tracks={playlist} />
+              time={formatTime(val.duration)} index={i+1} id={val.id} preview={val.preview} tracks={playlist} track={val}/>
        )
       })}
     </ul>

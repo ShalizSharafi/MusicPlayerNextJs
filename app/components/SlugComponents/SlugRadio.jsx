@@ -19,7 +19,7 @@ export default function SlugRadio({picture,radioTitle,id,userCreatedPlaylistId})
   )
 
   const [anchorEl,setAnchorEl] = useState(null)
-
+  const setPendingItem = userCreatedPlaylist((state)=>state.setPendingItem)
  return (
     <div onClick={()=> router.push(`/radio/${id}`)} className='w-full rounded-[10px] p-2.5 flex flex-wrap content-start gap-2.5 hover:bg-bareGray/20 duration-400 bg-transparent cursor-pointer hover:scale-95 group relative'>
       <figure className='w-full h-30  rounded-[5px] overflow-hidden lg:h-25 flex items-center justify-center '>
@@ -41,7 +41,17 @@ export default function SlugRadio({picture,radioTitle,id,userCreatedPlaylistId})
             </span>
              <span onClick={(e)=>{
               e.stopPropagation()
-              setAnchorEl(anchorEl ? null : e.currentTarget)
+              if (playlists.length === 0) {
+    setPendingItem({
+      picture,
+      radioTitle,
+      id,
+      userCreatedPlaylistId,
+      type:'radio'
+    })
+    router.push('/playlist/create')
+    return
+  } setAnchorEl(anchorEl ? null : e.currentTarget)
              }} className='w-6 h-6 absolute top-1 hidden items-center justify-center left-1 rounded-[5px] group-hover:flex duration-400'>
                     <PlusSvg added={isAdded}/>
                     <PlaylistMenu playlists={playlists} anchorEl={anchorEl} onClose={()=>setAnchorEl(null)} open={Boolean(anchorEl)} item={{

@@ -4,6 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import userCreatedPlaylist from '@/app/store/UserCreatedPlaylist'
 import { userPlaylistColors } from '@/app/colors/usermadePlaylistColors'
+import RemovePlaylistItem from './RemovePlaylistItem'
 
 export default function UserMadePlaylistsCards() {
   const playlists = userCreatedPlaylist((state)=>state.playlists)
@@ -20,6 +21,10 @@ export default function UserMadePlaylistsCards() {
        <h3 className='w-full flex items-center justify-start text-start text-[12px] lg:text-[14px] font-bold text-white'>{p.title}</h3>
        <h4 className='w-full flex items-center justify-start text-start text-xs text-white/60 hover:text-white duration-400'>Made by you</h4>
        <span className='w-full flex items-center justify-start text-start text-xs font-bold text-white capitalize'>{p.playlistItems?.length ?? 0 } tracks</span>
+                   <span className='w-6 h-6 absolute bottom-1 hidden items-center justify-center right-1 rounded-[5px] group-hover:flex duration-400'>
+        <RemovePlaylistItem playlistOnly userCreatedPlaylistId={p.userCreatedPlaylistId} />
+      </span>
+
       </div>
     </Link>
                )
@@ -27,3 +32,5 @@ export default function UserMadePlaylistsCards() {
        </>
   )
 }
+
+

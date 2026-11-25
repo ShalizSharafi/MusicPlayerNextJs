@@ -6,6 +6,7 @@ const userCreatedPlaylist = create(
        persist(
               (set) => ({
                      playlists: [],
+                     pendingItem: null,
 
                      ////add card to the userplay list section
                      addPlaylist : (playlist)=>
@@ -43,7 +44,12 @@ const userCreatedPlaylist = create(
               {
                    playlists:state.playlists.filter((val)=>Number(val.userCreatedPlaylistId) !== Number(userCreatedPlaylistId))
               }
-       ))
+       )),
+
+              ////pending items
+              setPendingItem:(item)=>
+                     set(({pendingItem : item}))
+
               }),
               { name: 'user-created-playlists' }
        )

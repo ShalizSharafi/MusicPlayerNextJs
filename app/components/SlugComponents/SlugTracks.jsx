@@ -14,6 +14,7 @@ export default function SlugTracks({trackName,artist,album,src,id,albumId,artist
   const toggleFavorites = useFavoriteStore((state)=>state.toggleFavorites)//the function axpects one (item) so inside the onClick we pass one object!
   const isFavorite = useFavoriteStore((state)=>state.isFavorite(id,'track'))
   const playlists = userCreatedPlaylist((state)=>state.playlists)
+  const setPendingItem = userCreatedPlaylist((state) => state.setPendingItem)
   const isAdded = playlists.some((val)=>
     val?.playlistItems.some((p)=>p.id === id && p.type === 'track')
   )
@@ -45,6 +46,20 @@ export default function SlugTracks({trackName,artist,album,src,id,albumId,artist
         <LikeSVG liked={isFavorite}/>
       </span>
       <span onClick={(e)=>{e.stopPropagation()
+       if (playlists.length === 0) {
+    setPendingItem({
+      trackName,
+      artist,
+      album,
+      src,
+      id,
+      albumId,
+      artistId,
+      type:'track'
+    })
+    router.push('/playlist/create')
+    return
+  }
   setAnchorEl(anchorEl ? null : e.currentTarget)
       }
       } 

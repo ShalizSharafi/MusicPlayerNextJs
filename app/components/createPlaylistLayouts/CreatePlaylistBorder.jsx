@@ -27,17 +27,33 @@ export default function CreatePlaylistBorder() {
        const [state,dispatch] = useReducer(reducer,{image:null, title:'', desc:''})
        const addPlaylist = userCreatedPlaylist((state)=>state.addPlaylist)
        const playlists = userCreatedPlaylist((state) => state.playlists)
+       const pendingItem = userCreatedPlaylist((state)=>state.pendingItem)
+       const addPlaylistItem = userCreatedPlaylist((state) => state.addPlaylistItem)
+       const setPendingItem = userCreatedPlaylist((state) => state.setPendingItem)
+
+
+       
+
+
+
+
 
        const handleSave = (e)=>{
               e.preventDefault() //prevents the form from refreshing the page
+       const newusermadeplaylistId = Date.now()////////////only when the user wants to create a playlist through track when there's no other usercreated playlist already being created
+
               addPlaylist({
-                     userCreatedPlaylistId:Date.now(),//for unique id
+                     userCreatedPlaylistId:newusermadeplaylistId,//for unique id
                      title:state.title,
                      desc:state.desc,
                      image:state.image,
                      playlistItems :[],
                      bgColor: userPlaylistColors[(playlists.length % 14) + 1]
               })
+              if(pendingItem){
+                     addPlaylistItem(newusermadeplaylistId,pendingItem)
+                     setPendingItem(null)
+              }
               dispatch({type:'RESET'})
        }
 

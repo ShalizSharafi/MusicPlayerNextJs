@@ -7,8 +7,9 @@ import useFavoriteStore from '@/app/store/FavoriteStore'
 import PlusSvg from './PlusSvg'
 import PlaylistMenu from './PlayListMenu'
 import userCreatedPlaylist from '@/app/store/UserCreatedPlaylist'
+import { useRouter } from 'next/navigation'
 /////rows
-export default function ListContent({title,picture,time,index,id,preview,tracks}) {
+export default function ListContent({title,picture,time,index,id,preview,tracks,track}) {
 
   const playTrack = usePlayerStore(state=>state.playTrack) //state isn't the properties themselves. It's the whole current Zustand store state,
   
@@ -18,8 +19,8 @@ export default function ListContent({title,picture,time,index,id,preview,tracks}
   const playlists = userCreatedPlaylist((state) => state.playlists)
   const [anchorEl, setAnchorEl] = useState(null)
   const isAdded = playlists.some((p)=>p?.playlistItems.some((val)=>val.id === id && val.type === 'track'))
-
-
+  const setPendingItem = userCreatedPlaylist((state)=>state.setPendingItem)
+  
   /////prev and next btns part
   const setTracks = usePlayerStore(state=>state.setTracks)
   useEffect(()=>{
@@ -33,6 +34,15 @@ export default function ListContent({title,picture,time,index,id,preview,tracks}
   console.log(currentTrackId, preview)
   // id of this row === currentTrackId in Zustand → isPlaying is true → PlayBtn shows Pause.
  
+  const router = useRouter()
+  console.log('TRACK BEING SAVED:', {
+  title: track?.title,
+  artist: track?.artist,
+  album: track?.album,
+  id: track?.id,
+  preview: track?.preview
+})
+
   return (
     <ul  onClick={() => {
     // console.log('clicked:', id)
@@ -61,19 +71,36 @@ export default function ListContent({title,picture,time,index,id,preview,tracks}
        <LikeSVG liked={isFavorite}/>
       </li>
 
-      <li onClick={(e)=>{e.stopPropagation()
+      <li onClick={(e)=>{
+  e.stopPropagation()
+
+  if (playlists.length === 0) {
+    setPendingItem({
+      trackName: track.title,
+  artist: track.artist?.name,
+  album: track.album?.title,
+  src: track.album?.cover,
+  id: track.id,
+  albumId: track.album?.id,
+  artistId: track.artist?.id,
+  type: 'track'
+    })
+    router.push('/playlist/create')
+    console.log('TRACK BEING SAVED:', track)
+    return
+  }
+
   setAnchorEl(anchorEl ? null : e.currentTarget)
-      }
-      } className='w-5 h-5 flex items-center justify-center'>
+}} className='w-5 h-5 flex items-center justify-center'>
        <PlusSvg added={isAdded}/>
          <PlaylistMenu playlists={playlists} open={Boolean(anchorEl)} onClose={() => setAnchorEl(null)} anchorEl={anchorEl} item={{
-  title,
-  image: picture,
-  time,
-  index,
-  id,
-  preview,
-  tracks,
+  trackName: track.title,
+  artist: track.artist?.name,
+  album: track.album?.title,
+  src: track.album?.cover,
+  id: track.id,
+  albumId: track.album?.id,
+  artistId: track.artist?.id,
   type: 'track'
 }}/>
       </li>

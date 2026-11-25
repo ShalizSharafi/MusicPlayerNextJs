@@ -12,7 +12,7 @@ export default function Artist({popularTracks=[],popularAlbums=[]}) {
       {
        popularTracks.map((p,i)=>{
               return(
-                     <ListContent key={`${p.id}-${i}`} title={p.title} picture={p.album.cover} time={formatTime(p.duration)} index={i+1} id={p.id} preview={p.preview} tracks={popularTracks}/>
+                     <ListContent key={`${p.id}-${i}`} title={p.title} picture={p.album.cover} time={formatTime(p.duration)} index={i+1} id={p.id} preview={p.preview} tracks={popularTracks} track={p}/>
               )
        })
       }

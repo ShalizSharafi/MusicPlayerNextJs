@@ -21,7 +21,7 @@ export default function SlugPlaylists({playlistTitle,picture,user,count,bgColor,
   )
 
   const [anchorEl,setAnchorEl] = useState(null)
-
+  const setPendingItem = userCreatedPlaylist((state)=>state.setPendingItem)
 
   return (
     <div onClick={()=>router.push(`/playlist/${id}`)} className='w-full rounded-[10px] p-2.5 flex relative group cursor-pointer flex-wrap content-start gap-2.5 hover:bg-bareGray/20 duration-400 hover:scale-95' style={{background : `linear-gradient(to bottom right, ${bgColor},${bgColor}, transparent)`}}>
@@ -49,7 +49,20 @@ export default function SlugPlaylists({playlistTitle,picture,user,count,bgColor,
             </span>
              <span onClick={(e)=>{
               e.stopPropagation()
-              setAnchorEl(anchorEl ? null : e.currentTarget)
+               if (playlists.length === 0) {
+    setPendingItem({
+      playlistTitle,
+      picture,
+      user,
+      count,
+      bgColor,
+      id,
+      userCreatedPlaylistId,
+      type:'playlist'
+    })
+    router.push('/playlist/create')
+    return
+  } setAnchorEl(anchorEl ? null : e.currentTarget)
              }} className='w-6 h-6 absolute top-1 hidden items-center justify-center left-1 rounded-[5px] group-hover:flex duration-400'>
                     <PlusSvg added={isAdded}/>
                     <PlaylistMenu playlists={playlists} open={Boolean(anchorEl)} onClose={()=>setAnchorEl(null)} anchorEl={anchorEl} item={{
