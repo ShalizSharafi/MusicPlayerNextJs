@@ -23,7 +23,7 @@ export default function SlugPlaylists({playlistTitle,picture,user,count,bgColor,
 
 
   return (
-    <div onClick={()=>router.push(`playlist/${id}`)} className='w-full rounded-[10px] p-2.5 flex relative group cursor-pointer flex-wrap content-start gap-2.5 hover:bg-bareGray/20 duration-400 hover:scale-95' style={{background : `linear-gradient(to bottom right, ${bgColor},${bgColor}, transparent)`}}>
+    <div onClick={()=>router.push(`/playlist/${id}`)} className='w-full rounded-[10px] p-2.5 flex relative group cursor-pointer flex-wrap content-start gap-2.5 hover:bg-bareGray/20 duration-400 hover:scale-95' style={{background : `linear-gradient(to bottom right, ${bgColor},${bgColor}, transparent)`}}>
       <figure className='w-full h-30  rounded-[5px] overflow-hidden lg:h-25 flex items-center justify-center p-1 bg-white/15 '>
        <img src={picture} alt={playlistTitle} className='w-full  h-full object-contain '/>
       </figure>

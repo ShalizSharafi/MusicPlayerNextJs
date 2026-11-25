@@ -20,7 +20,7 @@ export default function SlugRadio({picture,radioTitle,id}) {
   const [anchorEl,setAnchorEl] = useState(null)
 
  return (
-    <div onClick={()=> router.push(`radio/${id}`)} className='w-full rounded-[10px] p-2.5 flex flex-wrap content-start gap-2.5 hover:bg-bareGray/20 duration-400 bg-transparent cursor-pointer hover:scale-95 group relative'>
+    <div onClick={()=> router.push(`/radio/${id}`)} className='w-full rounded-[10px] p-2.5 flex flex-wrap content-start gap-2.5 hover:bg-bareGray/20 duration-400 bg-transparent cursor-pointer hover:scale-95 group relative'>
       <figure className='w-full h-30  rounded-[5px] overflow-hidden lg:h-25 flex items-center justify-center '>
        <img src={picture} alt={radioTitle} className='w-full  h-full object-cover '/>
       </figure>

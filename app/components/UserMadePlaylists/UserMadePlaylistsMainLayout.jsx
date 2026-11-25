@@ -6,6 +6,7 @@ import SlugTracks from '../SlugComponents/SlugTracks'
 import UserMadePlaylistsTitle from './UserMadePlaylistsTitle'
 import SlugAlbums from '../SlugComponents/SlugAlbums'
 import SlugPlaylists from '../SlugComponents/SlugPlaylists'
+import SlugRadio from '../SlugComponents/SlugRadio'
 
 export default function UserMadePlaylistsMainLayout({userCreatedPlaylistId}) {
   const playlists = userCreatedPlaylist((state)=>state.playlists)
@@ -44,7 +45,17 @@ export default function UserMadePlaylistsMainLayout({userCreatedPlaylistId}) {
       ) && <UserMadePlaylistsTitle topic='playlists'/>}
       { playlist?.playlistItems.map((val)=>(
         val.type === 'playlist' && (
-          <SlugPlaylists key={val.id}  />
+          <SlugPlaylists key={val.id} playlistTitle={val.playlistTitle} picture={val.picture} user={val.user} count={val.count} bgColor={val.bgColor} id={val.id}  />
+        )
+      ))}
+
+      {/* {radio} */}
+       {(playlist?.playlistItems?.length > 0 && 
+        playlist?.playlistItems.some((val)=>val.type === 'radio')
+      ) && <UserMadePlaylistsTitle topic='radios'/>}
+      { playlist?.playlistItems.map((val)=>(
+        val.type === 'radio' && (
+          <SlugRadio key={val.id} picture={val.picture} radioTitle={val.radioTitle} id={val.id}  />
         )
       ))}
 
