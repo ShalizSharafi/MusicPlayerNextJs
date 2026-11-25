@@ -22,18 +22,18 @@ const userCreatedPlaylist = create(
 
                      ///remove from each card
                      removePlaylistItem: (userCreatedPlaylistId, itemId, itemType) =>
-                            set((state) => ({
-                                   playlists: state.playlists.map((each) =>
-                                          each.userCreatedPlaylistId === userCreatedPlaylistId
-                                                 ? {
-                                                        ...each,
-                                                        playlistItems: each.playlistItems.filter(
-                                                               (item) => item.id !== itemId || item.type !== itemType
-                                                        )
-                                                 }
-                                                 : each
-                                   )
-                            }))
+  set((state) => ({
+    playlists: state.playlists.map((each) =>
+      Number(each.userCreatedPlaylistId) === Number(userCreatedPlaylistId)
+        ? {
+            ...each,
+            playlistItems: each.playlistItems.filter(
+              (item) => item.id !== itemId || item.type !== itemType
+            )
+          }
+        : each
+    )
+  }))
               }),
               { name: 'user-created-playlists' }
        )

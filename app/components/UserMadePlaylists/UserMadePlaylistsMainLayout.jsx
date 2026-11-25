@@ -50,7 +50,7 @@ console.log('is array:', Array.isArray(filteredItems))
       ) && <UserMadePlaylistsTitle topic='tracks'/>}
       { filteredItems?.map((val)=>(
         val.type === 'track' && (
-          <SlugTracks key={val.id} trackName={val.trackName} artist={val.artist} album={val.album} src={val.src} id={val.id} albumId={val.albumId} artistId={val.artistId} />
+          <SlugTracks key={val.id} trackName={val.trackName} artist={val.artist} album={val.album} src={val.src} id={val.id} albumId={val.albumId} artistId={val.artistId} userCreatedPlaylistId={userCreatedPlaylistId} />
         )
       ))}
 
@@ -60,7 +60,7 @@ console.log('is array:', Array.isArray(filteredItems))
       ) && <UserMadePlaylistsTitle topic='albums'/>}
       { filteredItems?.map((val)=>(
         val.type === 'album' && (
-          <SlugAlbums key={val.id} cover={val.cover} albumTitle={val.albumTitle} artist={val.artist} position={val.position} id={val.id} />
+          <SlugAlbums key={val.id} cover={val.cover} albumTitle={val.albumTitle} artist={val.artist} position={val.position} id={val.id} userCreatedPlaylistId={userCreatedPlaylistId}/>
         )
       ))}
 
@@ -70,7 +70,7 @@ console.log('is array:', Array.isArray(filteredItems))
       ) && <UserMadePlaylistsTitle topic='playlists'/>}
       { filteredItems?.map((val)=>(
         val.type === 'playlist' && (
-          <SlugPlaylists key={val.id} playlistTitle={val.playlistTitle} picture={val.picture} user={val.user} count={val.count} bgColor={val.bgColor} id={val.id}  />
+          <SlugPlaylists key={val.id} playlistTitle={val.playlistTitle} picture={val.picture} user={val.user} count={val.count} bgColor={val.bgColor} id={val.id} userCreatedPlaylistId={userCreatedPlaylistId} />
         )
       ))}
 
@@ -80,7 +80,7 @@ console.log('is array:', Array.isArray(filteredItems))
       ) && <UserMadePlaylistsTitle topic='radios'/>}
       { filteredItems?.map((val)=>(
         val.type === 'radio' && (
-          <SlugRadio key={val.id} picture={val.picture} radioTitle={val.radioTitle} id={val.id}  />
+          <SlugRadio key={val.id} picture={val.picture} radioTitle={val.radioTitle} id={val.id} userCreatedPlaylistId={userCreatedPlaylistId} />
         )
       ))}
 

@@ -7,8 +7,9 @@ import useFavoriteStore from '@/app/store/FavoriteStore'
 import PlusSvg from '../ContentLayout/PlusSvg'
 import userCreatedPlaylist from '@/app/store/UserCreatedPlaylist'
 import PlaylistMenu from '../ContentLayout/PlayListMenu'
+import RemovePlaylistItem from '../UserMadePlaylists/RemovePlaylistItem'
 
-export default function SlugRadio({picture,radioTitle,id}) {
+export default function SlugRadio({picture,radioTitle,id,userCreatedPlaylistId}) {
   const router = useRouter()
   const toggleFavorites = useFavoriteStore((state)=>state.toggleFavorites)
   const isFavorite = useFavoriteStore((state)=>state.isFavorite(id,'radio'))
@@ -50,6 +51,11 @@ export default function SlugRadio({picture,radioTitle,id}) {
                       id
                     }}/>
                   </span>
+                  {userCreatedPlaylistId && (
+                        <span className='w-6 h-6 absolute bottom-1 hidden items-center justify-center right-1 rounded-[5px] group-hover:flex duration-400'>
+                          <RemovePlaylistItem userCreatedPlaylistId={userCreatedPlaylistId} itemId={id} itemType='track'/>
+                        </span>
+                       )}
     </div>
   )
 }

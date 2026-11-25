@@ -23,7 +23,7 @@ export function DynamicFavorites() {
        console.log('favorites:',favorites)
   return (
        <>
-       <div className='w-full p-5 lg:p-10 mt-32 flex items-center'>
+       <div className='w-full pb-0 lg:pb-0 p-5 lg:p-10 mt-32 flex items-center'>
        <h2 className='w-full flex items-center text-start justify-start text-white capitalize font-bold text-xl lg:text-2xl'>My Favorites</h2>
       </div>
       { favorites?.length > 0 && <>

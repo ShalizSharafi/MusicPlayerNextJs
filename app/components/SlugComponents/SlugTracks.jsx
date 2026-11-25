@@ -7,8 +7,9 @@ import useFavoriteStore from '@/app/store/FavoriteStore'
 import PlusSvg from '../ContentLayout/PlusSvg'
 import userCreatedPlaylist from '@/app/store/UserCreatedPlaylist'
 import PlaylistMenu from '../ContentLayout/PlayListMenu'
+import RemovePlaylistItem from '../UserMadePlaylists/RemovePlaylistItem'
 
-export default function SlugTracks({trackName,artist,album,src,id,albumId,artistId}) {
+export default function SlugTracks({trackName,artist,album,src,id,albumId,artistId,userCreatedPlaylistId}) {
   const router = useRouter()
   const toggleFavorites = useFavoriteStore((state)=>state.toggleFavorites)//the function axpects one (item) so inside the onClick we pass one object!
   const isFavorite = useFavoriteStore((state)=>state.isFavorite(id,'track'))
@@ -17,7 +18,7 @@ export default function SlugTracks({trackName,artist,album,src,id,albumId,artist
     val?.playlistItems.some((p)=>p.id === id && p.type === 'track')
   )
   const [anchorEl,setAnchorEl] = useState(null)
-
+ 
 
   return (
     <div onClick={()=>router.push(`/track/${id}`)} className='w-full bg-transparent relative cursor-pointer rounded-[10px] p-2.5 flex flex-wrap content-start gap-2.5 hover:bg-bareGray/20 duration-400 hover:scale-95 group'>
@@ -60,6 +61,11 @@ export default function SlugTracks({trackName,artist,album,src,id,albumId,artist
           type:'track'
         }}/>
       </span>
+     {userCreatedPlaylistId && (
+      <span className='w-6 h-6 absolute bottom-1 hidden items-center justify-center right-1 rounded-[5px] group-hover:flex duration-400'>
+        <RemovePlaylistItem userCreatedPlaylistId={userCreatedPlaylistId} itemId={id} itemType='track'/>
+      </span>
+     )}
     </div>
   )
 }

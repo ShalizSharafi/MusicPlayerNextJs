@@ -7,9 +7,10 @@ import useFavoriteStore from '@/app/store/FavoriteStore'
 import PlusSvg from '../ContentLayout/PlusSvg'
 import userCreatedPlaylist from '@/app/store/UserCreatedPlaylist'
 import PlaylistMenu from '../ContentLayout/PlayListMenu'
+import RemovePlaylistItem from '../UserMadePlaylists/RemovePlaylistItem'
 // import usePlayerStore from '@/app/store/PlayerStore'
 
-export default function SlugAlbums({cover,albumTitle,artist,position,id}) {
+export default function SlugAlbums({cover,albumTitle,artist,position,id,userCreatedPlaylistId}) {
   const router = useRouter()
   const toggleFavorites = useFavoriteStore((state)=>state.toggleFavorites)//the function axpects one (item) so inside the onClick we pass one object!
   const isFavorite = useFavoriteStore((state)=>state.isFavorite(id,'album'))
@@ -55,6 +56,12 @@ export default function SlugAlbums({cover,albumTitle,artist,position,id}) {
                       id
                     }} playlists={playlists}/>
                   </span>
+
+                  {userCreatedPlaylistId && (
+                        <span className='w-6 h-6 absolute bottom-1 hidden items-center justify-center right-1 rounded-[5px] group-hover:flex duration-400'>
+                          <RemovePlaylistItem userCreatedPlaylistId={userCreatedPlaylistId} itemId={id} itemType='track'/>
+                        </span>
+                       )}
     </div>
   )
 }
