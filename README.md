@@ -6,7 +6,7 @@ The project uses the **Deezer API** to provide artists, albums, tracks, playlist
 
 ## 🎧 Live Demo
 
-**[→ Open sofar](https://music-player-next-js-orpin.vercel.app/)**
+**[→ Live Demo](https://music-player-next-js-orpin.vercel.app/)**
 
 <img width="1524" height="954" alt="download" src="https://github.com/user-attachments/assets/00d473b1-2568-478f-b1ed-32db36266614" />
 
