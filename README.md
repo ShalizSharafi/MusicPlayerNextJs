@@ -8,7 +8,8 @@ The project uses the **Deezer API** to provide artists, albums, tracks, playlist
 
 **[→ Live Demo](https://music-player-next-js-orpin.vercel.app/)**
 
-<img width="1524" height="954" alt="download" src="https://github.com/user-attachments/assets/00d473b1-2568-478f-b1ed-32db36266614" />
+<img width="1536" height="1024" alt="d2b57eff-3159-44a5-9909-4452349208b9" src="https://github.com/user-attachments/assets/38027a04-804a-45db-8cd0-20876ac18e93" />
+
 
 
 ## ✨ Features
